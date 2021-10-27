@@ -22,11 +22,18 @@ const useGameState = () => {
     setStepNumber((currentStepNumber) => currentStepNumber + 1);
   }
 
+  const restartGame = () => {
+    setStepNumber(0)
+    setNextPlayer('X')
+    currentBoard = Array(9).fill(null);
+  }
+
   return {
     nextPlayer,
     stepNumber,
     currentBoard,
-    computeMove
+    computeMove,
+    restartGame
   }
 }
 

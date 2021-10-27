@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useGameState from "./useGameState";
 
 function calculateWinner(squares : any) {
@@ -65,16 +66,21 @@ const Game: React.FC = () => {
     currentBoard,
     stepNumber,
     nextPlayer,
-    computeMove
+    computeMove,
+    restartGame
   } = useGameState();
 
   const handleSquareClick = (squareId: number) => {
     if (calculateWinner(currentBoard) || currentBoard[squareId]) {
-      // Game over or square already handled
+      // Game over or square already handle
       return;
     }
     computeMove(nextPlayer, squareId);
   };
+
+  const isGameOver = () : boolean => {
+    return calculateWinner(currentBoard) ? true : false
+  }
 
   const renderStatusMessage = () => {
     const winner = calculateWinner(currentBoard);
@@ -86,6 +92,10 @@ const Game: React.FC = () => {
       return "Next player: " + (nextPlayer === 'X' ? "❌" : "⭕");
     }
   };
+
+  const onClickPlayAgain = () =>  {
+    restartGame()
+  }
 
   return (
     <>
@@ -102,6 +112,9 @@ const Game: React.FC = () => {
         <div className="game-info">
           <div>Current step: {stepNumber}</div>
           <div>{renderStatusMessage()}</div>
+          <div className="button-container">
+            {isGameOver() && <button className="button" onClick={onClickPlayAgain}>Play again</button>}
+          </div>
         </div>
       </div>
     </>
