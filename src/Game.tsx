@@ -93,7 +93,7 @@ const Game: React.FC = () => {
   };
 
   const onClickPlayAgain = () =>  {
-    restartGame()
+    restartGame();
   }
 
   return (
