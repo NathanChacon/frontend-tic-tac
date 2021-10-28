@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useGameState from "./useGameState";
 
 function calculateWinner(squares : any) {
