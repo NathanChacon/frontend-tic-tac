@@ -87,7 +87,6 @@ it("it should draw", () => {
   fireEvent.click(square8)
 
   getByText("Draw: Game over");
-
 })
 
 it("should not change state when click 2 times on same block", () => {
@@ -97,8 +96,52 @@ it("should not change state when click 2 times on same block", () => {
   fireEvent.click(square0)
   fireEvent.click(square0)
 
-
   expect(square0).toHaveTextContent('X')
   expect(getByText("Current step: 1")).toBeTruthy()
+  expect(getByText("Next player: ⭕")).toBeTruthy()
+})
+
+it("should render play again button when game over", () => {
+  const { getByText, getByTestId } = render(<Game />);
+
+  const square0 = getByTestId(`square-0`);
+  const square1 = getByTestId(`square-1`);
+  const square2 = getByTestId(`square-2`);
+  const square3 = getByTestId(`square-3`);
+  const square5 = getByTestId(`square-5`);
+  const square8 = getByTestId(`square-8`);
+
+  fireEvent.click(square0)
+  fireEvent.click(square2)
+  fireEvent.click(square1)
+  fireEvent.click(square5)
+  fireEvent.click(square3)
+  fireEvent.click(square8)
+
+  getByText('Play again')
+})
+
+it("should restart game and change initial player when click play again", () => {
+  const { getByText, getByTestId } = render(<Game />);
+
+  const square0 = getByTestId(`square-0`);
+  const square1 = getByTestId(`square-1`);
+  const square2 = getByTestId(`square-2`);
+  const square3 = getByTestId(`square-3`);
+  const square5 = getByTestId(`square-5`);
+  const square8 = getByTestId(`square-8`);
+
+  fireEvent.click(square0)
+  fireEvent.click(square2)
+  fireEvent.click(square1)
+  fireEvent.click(square5)
+  fireEvent.click(square3)
+  fireEvent.click(square8)
+
+  const playAgainButton = getByText('Play again');
+
+  fireEvent.click(playAgainButton)
+
+  expect(getByText("Current step: 0")).toBeTruthy()
   expect(getByText("Next player: ⭕")).toBeTruthy()
 })
