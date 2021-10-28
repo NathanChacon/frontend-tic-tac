@@ -24,7 +24,7 @@ it("renders board and check for step counter update", () => {
 
 it("should player X be winner", () => {
   
-  const { getByText, getByTestId, findByText} = render(<Game />);
+  const { getByText, getByTestId} = render(<Game />);
 
   const square0 = getByTestId(`square-0`);
   const square4 = getByTestId(`square-4`);

@@ -7,8 +7,9 @@ import { useState } from "react";
 type Player = 'X' | 'O'
 
 const useGameState = () => {
+  const [initialPlayer, setInitialPlayer] = useState<Player>('X')
   const [stepNumber, setStepNumber] = useState(0);
-  const [nextPlayer, setNextPlayer] = useState<Player>('X');
+  const [nextPlayer, setNextPlayer] = useState<Player>(initialPlayer);
   const [currentBoard, setCurrentBoard] = useState(Array(9).fill(null))
 
   const computeMove = (nextPlayer: Player, squareId: any) => {
@@ -25,8 +26,10 @@ const useGameState = () => {
   }
 
   const restartGame = () => {
+    const player:Player = initialPlayer === 'X' ? 'O' : 'X'
     setStepNumber(0)
-    setNextPlayer('X')
+    setInitialPlayer(player)
+    setNextPlayer(player)
     setCurrentBoard(Array(9).fill(null))
   }
 
