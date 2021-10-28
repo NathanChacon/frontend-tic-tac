@@ -78,7 +78,7 @@ const Game: React.FC = () => {
   };
 
   const isGameOver = () : boolean => {
-    return calculateWinner(currentBoard) ? true : false
+    return calculateWinner(currentBoard) || stepNumber === 9 ? true : false
   }
 
   const renderStatusMessage = () => {
